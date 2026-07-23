@@ -3,6 +3,50 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 
 import streamlit as st
+from sqlalchemy import create_engine, inspect
+from sqlalchemy.orm import sessionmaker
+from config.settings import SQLALCHEMY_DATABASE_URI
+from database.models import Base, Company
+
+def ensure_db_initialized():
+    try:
+        engine = create_engine(SQLALCHEMY_DATABASE_URI)
+        inspector = inspect(engine)
+        tables_exist = inspector.has_table("companies")
+        
+        if not tables_exist:
+            from scripts.init_db import init_db
+            from scripts.seed_companies import seed
+            from modules.scoring.pb_score_aggregator import calculate_all_scores
+            from modules.ranking.ranking_engine import update_rankings
+            from modules.ranking.portfolio_engine import generate_portfolio_recommendations
+
+            init_db()
+            seed()
+            calculate_all_scores()
+            update_rankings()
+            generate_portfolio_recommendations()
+        else:
+            Session = sessionmaker(bind=engine)
+            session = Session()
+            count = session.query(Company).count()
+            session.close()
+
+            if count == 0:
+                from scripts.seed_companies import seed
+                from modules.scoring.pb_score_aggregator import calculate_all_scores
+                from modules.ranking.ranking_engine import update_rankings
+                from modules.ranking.portfolio_engine import generate_portfolio_recommendations
+
+                seed()
+                calculate_all_scores()
+                update_rankings()
+                generate_portfolio_recommendations()
+    except Exception as e:
+        st.error(f"Automatic Database Setup Notice: {e}")
+
+# Run automatic database initialization on app startup
+ensure_db_initialized()
 
 st.set_page_config(
     page_title="PB Equity Intelligence Terminal",
