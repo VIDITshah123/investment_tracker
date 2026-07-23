@@ -1,0 +1,27 @@
+# Environment variables & Secrets (CRITICAL)
+.env
+.env.local
+*.env
+
+# Python Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Database & Downloads & WAL files
+*.db
+*.db-shm
+*.db-wal
+database/*.db*
+data/
+logs/*.log
+backups/
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

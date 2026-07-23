@@ -1,0 +1,18 @@
+adapters:
+  MCX:
+    ir_url: "https://www.mcxindia.com/investor-relations"
+    selectors:
+      annual_report: "a[href*='annual']"
+      transcript: "a[href*='transcript']"
+
+  TRENT:
+    ir_url: "https://trentlimited.com/pages/investors"
+    selectors:
+      annual_report: "a[href*='Annual_Report']"
+      transcript: "a[href*='Concall']"
+
+  HINDCOPPER:
+    ir_url: "https://www.hindustancopper.com/Page/InvestorRelations"
+
+  FORCEMOT:
+    ir_url: "https://www.forcemotors.com/investor-relations"
