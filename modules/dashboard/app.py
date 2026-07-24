@@ -69,8 +69,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 from modules.dashboard.views import (
-    home, companies, company_profile, rankings, sector_view,
-    compare, watchlist, portfolio, ai_chat, alerts, historical_trends, settings
+    home, companies, company_profile, concall_research, rankings,
+    compare, portfolio, historical_trends, ai_chat, settings
 )
 
 def main():
@@ -83,14 +83,12 @@ def main():
             "🏠 Home",
             "🏢 Companies",
             "📈 Company Profile",
+            "🎙️ Concall Research",
             "🏆 Rankings",
-            "🏭 Sector View",
             "📊 Compare Companies",
-            "⭐ Watchlist",
             "💼 Portfolio",
-            "🤖 AI Chat",
-            "🔔 Alerts",
             "📉 Historical Trends",
+            "🤖 AI Chat",
             "⚙️ Settings"
         ]
     )
@@ -101,22 +99,18 @@ def main():
         companies.show()
     elif page == "📈 Company Profile":
         company_profile.show()
+    elif page == "🎙️ Concall Research":
+        concall_research.show()
     elif page == "🏆 Rankings":
         rankings.show()
-    elif page == "🏭 Sector View":
-        sector_view.show()
     elif page == "📊 Compare Companies":
         compare.show()
-    elif page == "⭐ Watchlist":
-        watchlist.show()
     elif page == "💼 Portfolio":
         portfolio.show()
-    elif page == "🤖 AI Chat":
-        ai_chat.show()
-    elif page == "🔔 Alerts":
-        alerts.show()
     elif page == "📉 Historical Trends":
         historical_trends.show()
+    elif page == "🤖 AI Chat":
+        ai_chat.show()
     elif page == "⚙️ Settings":
         settings.show()
 
